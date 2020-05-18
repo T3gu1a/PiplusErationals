@@ -5,7 +5,7 @@ https://www.bertrandteguia.com
 University of Kassel, Germany
 May, 2020
 
-This Maxima package provides two functions "pirationals" and "pipluserationals" that compute very good rational approximations of Pi and Pi+e, respectively. The output is a list of pairs of integers where the first component represents the numerator and the second represents the denominator.
+This Maxima package provides two functions "pirationals" and "pipluserationals" that compute very good rational approximations to Pi and Pi+e, respectively. The output is a list of pairs of integers where the first component represents the numerator and the second represents the denominator.
 
 Eg. Once the package is load to a Maxima environement (like wxMaxima), the code can be used as follows:
 
