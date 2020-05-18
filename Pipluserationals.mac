@@ -1,0 +1,100 @@
+/********************************************************************************************** 
+By Dr. Bertrand Teguia Tabuguia, Ph.D.
+bertrand.teguia@aims-cameroon.org
+https://www.bertrandteguia.com
+University of Kassel, Germany
+Mai, 2020
+
+This Maxima package provides two functions "pirationals" and "pipluserationals" that compute very good rational approximations of Pi and Pi+e, respectively. The output is a list of pairs of integers where the first component represents the numerator and the second represents the denominator.
+
+Eg. Once the package is load to a Maxima environement (like wxMaxima), the code can be used as follows:
+
+(%i1) pirationals(1,500);
+
+(%o1) [[22,7],[44,14],[355,113]]
+
+(%i2) pipluserationals(1,1000);
+
+(%o2) [[920,157]]
+
+And for me 920/157 is special! At least as 22/7 and 355/113 are.
+*********************************************************************************************/
+
+Copyright():=block([],
+    print("By Dr. Bertrand Teguia Tabuguia, Ph.D."),
+    print("https://www.bertrandteguia.com"),
+    print("bertrand.teguia@aims-cameroon.org"),
+    print("University of Kassel, Germany"),
+    print("May, 2020"),
+    print("")
+)$
+
+/* The code for Pi */
+
+sumpartpiestim[0]:4$ 
+
+sumpartpiestim[n]:=sumpartpiestim[n-1]+binomial(2*n,n)/4^(n-1)/(2*n+1)$
+
+piestim(q,j):=block([],
+    1/q-sumpartpiestim[j]/2/(j+1)
+)$
+
+pirationals(minnum,maxnum):=catch(block(
+    [lobound,upbound,Listrat,n,j,q,evlobound,evpiestimn,evupbound,evpiestimq,k],
+    if(maxnum<6) then throw([]),
+    lobound:binomial(2*(n+1),n+1)/2/(n+1)/4^n,
+    upbound:binomial(2*(n+1),n+1)/(2*n+1)/4^n,
+    Listrat:[],
+    for j:max(minnum,6) thru maxnum do (
+        evlobound:ev(lobound,n=j),
+        evpiestimn:piestim(q,j),
+        evupbound:ev(upbound,n=j),
+        k:floor(j/3),
+        evpiestimq:ev(evpiestimn,q=k),
+        while(evpiestimq<=evupbound and k>1) do (
+            if(evpiestimq>=evlobound) then Listrat:endcons([j+1,k],Listrat),
+            k:k-1,
+            evpiestimq:ev(evpiestimn,q=k)
+        )
+
+    ),
+    Listrat
+
+))$
+
+/* The code for Pi+e */
+
+sumpartpiestim[0]:4$ sumpartpiestim[n]:=sumpartpiestim[n-1]+binomial(2*n,n)/4^(n-1)/(2*n+1)$
+
+
+sumparteestim[0]:1$ sumparteestim[n]:=sumparteestim[n-1]+1/n!$
+
+pipluseestim(q,j):=block([],
+    1/q-(sumpartpiestim[j]/2+sumparteestim[j])/(j+1)
+)$
+
+
+pipluserationals(minnum,maxnum):=catch(block(
+    [lobound,pipluseestim,upbound,Listfrac,n,j,q,evlobound,evpipluseestimj,evupbound,
+    evpipluseestimq,k],
+    if(maxnum<10) then throw([]),
+    lobound:binomial(2*(n+1),n+1)/2/(n+1)/4^n,
+    upbound:binomial(2*(n+1),n+1)/(2*n+1)/4^n+1/(n+1)!/n,
+    Listrat:[],
+    for j:max(minnum,10) thru maxnum do (
+        evlobound:ev(lobound,n=j),
+        evpipluseestimj:pipluseestim(q,j),
+        evupbound:ev(upbound,n=j),
+        k:floor(j/5),
+        evpipluseestimq:ev(evpipluseestimj,q=k),
+        print(evpipluseestimq),
+        while(evpipluseestimq<=evupbound and k>1) do (
+            if(evpipluseestimq>=evlobound) then Listfrac:endcons([j+1,k],Listrat),
+            k:k-1,
+            evpipluseestimq:ev(evpipluseestimj,q=k)
+        )   
+    ),
+    Listrat
+))$
+
+Copyright();
