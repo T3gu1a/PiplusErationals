@@ -82,7 +82,6 @@ pipluserationals(minnum,maxnum):=catch(block(
         evupbound:ev(upbound,n=j),
         k:floor(j/5),
         evpipluseestimq:ev(evpipluseestimj,q=k),
-        print(evpipluseestimq),
         while(evpipluseestimq<=evupbound and k>1) do (
             if(evpipluseestimq>=evlobound) then Listfrac:endcons([j+1,k],Listrat),
             k:k-1,
