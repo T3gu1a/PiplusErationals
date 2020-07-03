@@ -69,7 +69,7 @@ pipluseestim(q,j):=block([],
 
 
 pipluserationals(minnum,maxnum):=catch(block(
-    [lobound,pipluseestim,upbound,Listfrac,n,j,q,evlobound,evpipluseestimj,evupbound,
+    [lobound,pipluseestim,upbound,Listrat,n,j,q,evlobound,evpipluseestimj,evupbound,
     evpipluseestimq,k],
     if(maxnum<10) then throw([]),
     lobound:binomial(2*(n+1),n+1)/2/(n+1)/4^n,
@@ -82,7 +82,7 @@ pipluserationals(minnum,maxnum):=catch(block(
         k:floor(j/5),
         evpipluseestimq:ev(evpipluseestimj,q=k),
         while(evpipluseestimq<=evupbound and k>1) do (
-            if(evpipluseestimq>=evlobound) then Listfrac:endcons([j+1,k],Listrat),
+            if(evpipluseestimq>=evlobound) then Listrat:endcons([j+1,k],Listrat),
             k:k-1,
             evpipluseestimq:ev(evpipluseestimj,q=k)
         )   
