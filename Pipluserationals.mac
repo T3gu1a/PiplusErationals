@@ -59,10 +59,9 @@ pirationals(minnum,maxnum):=catch(block(
 
 /* The code for Pi+e */
 
-sumpartpiestim[0]:4$ sumpartpiestim[n]:=sumpartpiestim[n-1]+binomial(2*n,n)/4^(n-1)/(2*n+1)$
+sumparteestim[0]:1$ 
 
-
-sumparteestim[0]:1$ sumparteestim[n]:=sumparteestim[n-1]+1/n!$
+sumparteestim[n]:=sumparteestim[n-1]+1/n!$
 
 pipluseestim(q,j):=block([],
     1/q-(sumpartpiestim[j]/2+sumparteestim[j])/(j+1)
