@@ -16,11 +16,10 @@ Eg. Once the package is load to a Maxima environement (like wxMaxima), the code 
 ***************************************************************************************************************/
 
 Copyright():=block([],
-    print("By Dr. Bertrand Teguia Tabuguia, Ph.D."),
+    print("Copyright (c) May 2020 Bertrand Teguia T."),
     print("https://www.bertrandteguia.com"),
-    print("bertrand.teguia@aims-cameroon.org"),
+    print("bteguia@mathematik.uni-kassel.de"),
     print("University of Kassel, Germany"),
-    print("May, 2020"),
     print("")
 )$
 
