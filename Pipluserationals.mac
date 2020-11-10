@@ -68,7 +68,7 @@ pipluseestim(q,j):=block([],
 
 
 pipluserationals(minnum,maxnum):=catch(block(
-    [lobound,pipluseestim,upbound,Listrat,n,j,q,evlobound,evpipluseestimj,evupbound,
+    [lobound,upbound,Listrat,n,j,q,evlobound,evpipluseestimj,evupbound,
     evpipluseestimq,k],
     if(maxnum<10) then throw([]),
     lobound:binomial(2*(n+1),n+1)/2/(n+1)/4^n,
